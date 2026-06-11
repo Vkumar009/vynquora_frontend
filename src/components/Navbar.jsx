@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 
 const links = [
-  { label: 'Services', href: '/services' },
-  { label: 'About', href: '/about' },
-  { label: 'Process', href: '/process' },
-  { label: 'Carrers', href: '/careers' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Home', to: '/' },
+  { label: 'Services', to: '/services' },
+  { label: 'About', to: '/about' },
+  { label: 'Process', to: '/process' },
+  { label: 'Carrers', to: '/careers' },
+  
   
 ]
 
@@ -38,7 +39,7 @@ export default function Navbar() {
         }}
       >
         {/* Logo */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <img src="/logo.png" alt="Vynquora" style={{
             width: 38, height: 38, borderRadius: '50%',
             border: '1.5px solid rgba(77,108,255,0.5)',
@@ -50,7 +51,7 @@ export default function Navbar() {
           }}>
             Vyn<span style={{ color: 'var(--accent)' }}>quora</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links — sirf bade screens pe */}
         <ul style={{
@@ -58,19 +59,19 @@ export default function Navbar() {
         }} className="desktop-nav">
           {links.map(l => (
             <li key={l.label}>
-              <a href={l.href} style={{
+              <Link to={l.to} style={{
                 color: 'var(--muted)', fontSize: '0.88rem', fontWeight: 400,
                 letterSpacing: '0.03em', transition: 'color 0.2s',
               }}
                 onMouseEnter={e => e.target.style.color = '#fff'}
                 onMouseLeave={e => e.target.style.color = 'var(--muted)'}
-              >{l.label}</a>
+              >{l.label}</Link>
             </li>
           ))}
         </ul>
 
         {/* Desktop CTA button */}
-        <a href="#contact" className="desktop-nav" style={{
+        <Link to="/contact" className="desktop-nav" style={{
           background: 'var(--blue)', color: '#fff',
           padding: '0.52rem 1.4rem', borderRadius: 100,
           fontSize: '0.88rem', fontWeight: 500,
@@ -80,7 +81,7 @@ export default function Navbar() {
           onMouseLeave={e => e.target.style.background = 'var(--blue)'}
         >
           Get in Touch
-        </a>
+        </Link>
 
         {/* Hamburger button — sirf mobile pe */}
         <button
@@ -124,23 +125,23 @@ export default function Navbar() {
             className="mobile-menu"
           >
             {links.map(l => (
-              <a key={l.label} href={l.href}
+              <Link key={l.label} to={l.to}
                 onClick={() => setOpen(false)}
                 style={{
                   color: 'var(--muted)', fontSize: '1rem', fontWeight: 500,
                   letterSpacing: '0.03em', transition: 'color 0.2s',
                   borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '1rem',
                 }}
-              >{l.label}</a>
+              >{l.label}</Link>
             ))}
-            <a href="#contact" onClick={() => setOpen(false)} style={{
+            <Link to="/contact" onClick={() => setOpen(false)} style={{
               background: 'var(--blue)', color: '#fff',
               padding: '0.7rem 1.4rem', borderRadius: 100,
               fontSize: '0.9rem', fontWeight: 500,
               textAlign: 'center', marginTop: '0.4rem',
             }}>
               Get in Touch
-            </a>
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>

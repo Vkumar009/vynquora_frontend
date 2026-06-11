@@ -1,18 +1,19 @@
+import { Link } from "react-router-dom";
 export default function Footer() {
   const year = new Date().getFullYear()
   return (
     <footer style={{ background:'var(--navy)', borderTop:'1px solid rgba(255,255,255,0.06)', padding:'4rem 5% 2rem' }}>
       <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(180px, 1fr))', gap:'2.5rem', marginBottom:'3rem' }}>
         <div>
-          <a href="#" style={{ display:'flex', alignItems:'center', gap:10, marginBottom:'1rem' }}>
+          <Link to="/" style={{ display:'flex', alignItems:'center', gap:10, marginBottom:'1rem' }}>
             <img src="/logo.png" alt="Vynquora" style={{ width:36, height:36, borderRadius:'50%', objectFit:'cover', border:'1.5px solid rgba(77,108,255,0.5)' }}/>
             <span style={{ fontFamily:'Syne', fontWeight:700, fontSize:'1.2rem' }}>Vyn<span style={{ color:'var(--accent)' }}>quora</span></span>
-          </a>
+          </Link>
           <p style={{ color:'var(--muted)', fontSize:'0.86rem', lineHeight:1.75, fontWeight:300, maxWidth:260 }}>Professional data management and digital solutions. Accurate, secure, and reliable — every time.</p>
         </div>
         {[
           { title:'Services', links:[{name:'Data Entry', url:'#'},{name:'Data Verification', url:'#'},{name:'Document Processing', url:'#'},{name:'Medical Data', url:'#'},{name:'Reporting', url:'#'}] },
-          { title:'Company', links:[{name:'About Us', url:'#'},{name:'Our Process', url:'#'},{name:'Careers', url:'/careers'},{name:'Contact', url:'#contact'}] },
+          { title:'Company', links:[{name:'About Us', url:'/about'},{name:'Our Process', url:'/process'},{name:'Careers', url:'/careers'},{name:'Contact', url:'/contact'}] },
           { 
             title:'Connect', 
             links:[
