@@ -1,6 +1,7 @@
 import AnimatedSection from '../components/AnimatedSection'
 import { useState } from 'react'
 
+
 export default function Contact() {
   const [form, setForm] = useState({ name:'', email:'', company:'', message:'' })
   const [status, setStatus] = useState('idle') // idle | loading | success | error
