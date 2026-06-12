@@ -232,7 +232,7 @@ const FAQ_ITEMS = [
 function WhyCard({ card, index }) {
   const [hov, setHov] = useState(false);
   return (
-    <AnimatedSection delay={index * 0.08}>
+    <AnimatedSection delay={index * 0.08} style={{ height: "100%" }}>
       <div
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
@@ -292,7 +292,7 @@ function WhyCard({ card, index }) {
 function BenefitCard({ b, index }) {
   const [hov, setHov] = useState(false);
   return (
-    <AnimatedSection delay={index * 0.06}>
+    <AnimatedSection delay={index * 0.06} style={{ height: "100%" }}>
       <div
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
@@ -304,6 +304,7 @@ function BenefitCard({ b, index }) {
           transition: "all 0.3s ease",
           transform: hov ? "translateY(-4px)" : "none",
           boxShadow: hov ? "0 16px 48px rgba(26,58,255,0.12)" : "none",
+          height: "100%",
         }}
       >
         <div
@@ -351,7 +352,7 @@ function JobCard({ job, index, onApply }) {
   const [hov, setHov] = useState(false);
   const isClosed = job.pos === "Closed";
   return (
-    <AnimatedSection delay={index * 0.07}>
+    <AnimatedSection delay={index * 0.07} style={{ height: "100%" }}>
       <div
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
@@ -364,6 +365,7 @@ function JobCard({ job, index, onApply }) {
           transform: hov ? "translateY(-4px)" : "none",
           boxShadow: hov ? "0 16px 48px rgba(26,58,255,0.12)" : "none",
           minHeight: "300px",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           gap: "1.2rem",
@@ -516,7 +518,7 @@ function JobCard({ job, index, onApply }) {
 
 function TestimonialCard({ t, index }) {
   return (
-    <AnimatedSection delay={index * 0.1}>
+    <AnimatedSection delay={index * 0.1} style={{ height: "100%" }}>
       <div
         style={{
           background: "var(--card)",
@@ -1059,8 +1061,20 @@ export default function Careers() {
 
         /* Mobile: padding reduce */
         @media (max-width: 768px) {
-          .careers-section-pad { padding: 4rem 5% !important; }
+          .careers-section-pad { padding: 3.5rem 5% !important; }
           .hero-content { max-width: 100% !important; }
+          section[aria-label="Careers hero"] {
+            min-height: auto !important;
+            padding-top: 5rem !important;
+            padding-bottom: 3rem !important;
+            align-items: flex-start !important;
+          }
+        }
+
+        /* Grids: equal height rows */
+        .why-grid > *, .life-grid > *, .benefit-grid > *, .testimonials-grid > * {
+          display: flex;
+          flex-direction: column;
         }
 
         /* Hiring steps: vertical on mobile */
@@ -1088,6 +1102,13 @@ export default function Careers() {
         @media (max-width: 400px) {
           .hero-stats { gap: 1.2rem !important; }
         }
+
+        /* Center single/orphan cards in auto-fit grids on narrow screens */
+        @media (max-width: 600px) {
+          .why-grid, .life-grid, .benefit-grid, .testimonials-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
       `}</style>
 
       <main id="careers">
@@ -1098,10 +1119,13 @@ export default function Careers() {
           aria-label="Careers hero"
           className="careers-section-pad"
           style={{
-            minHeight: "100vh",
+            minHeight: "calc(100vh - 70px)",
             display: "flex",
             alignItems: "center",
-            padding: "clamp(6rem, 10vw, 8rem) 5% clamp(4rem, 8vw, 5rem)",
+            paddingTop: "clamp(4.5rem, 8vw, 7rem)",
+            paddingBottom: "clamp(3rem, 6vw, 4.5rem)",
+            paddingLeft: "5%",
+            paddingRight: "5%",
             position: "relative",
             overflow: "hidden",
           }}
@@ -1471,7 +1495,7 @@ export default function Careers() {
             }}
           >
             {LIFE_BLOCKS.map((lb, i) => (
-              <AnimatedSection key={lb.title} delay={i * 0.08}>
+              <AnimatedSection key={lb.title} delay={i * 0.08} style={{ height: "100%" }}>
                 <div
                   style={{
                     background: "var(--card)",
@@ -1722,8 +1746,9 @@ export default function Careers() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(260px, 100%), 1fr))",
               gap: "1.2rem",
+              justifyContent: "center",
             }}
           >
             {TESTIMONIALS.map((t, i) => (
